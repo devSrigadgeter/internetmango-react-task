@@ -1,2 +1,1 @@
-# internetmango-react-task
-InternetMango React Task
+# InternetMango React Task
