@@ -59,6 +59,9 @@ const styles = {
     "& .MuiInput-root:before": {
       borderBottom: "none",
     },
+    "& .MuiInput-root:hover:before": {
+      borderBottom: "none !important",
+    },
   },
   select: {
     width: 90,
