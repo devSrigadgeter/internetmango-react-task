@@ -13,6 +13,7 @@ const theme = ({ children }) => {
           },
           text: {
             primary: "#484848",
+            white: "#fff",
           },
         },
       })}
