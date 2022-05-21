@@ -5,6 +5,7 @@ import axios from "axios";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
 // internal imports
+import Loader from "../../components/loader/Loader";
 import Filters from "../../components/filters/Filters";
 import Carousel from "../../components/carousel/Carousel";
 import ProductCard from "../../components/product/ProductCard";
@@ -47,11 +48,13 @@ const Products = () => {
   const [paginatedData, setPaginatedData] = useState(
     storedPaginatedProducts || []
   );
-  const [pageCount, setPageCount] = useState(1);
+  const [loader, setLoader] = useState(false);
+  const [pageCount, setPageCount] = useState(0);
 
   const dispatch = useDispatch();
 
   const fetchProducts = () => {
+    setLoader(true);
     axios
       .get(PRODUCTS_API_URL)
       .then((res) => {
@@ -67,7 +70,8 @@ const Products = () => {
           dispatch(updatePaginatedProducts(pageData));
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setLoader(false));
   };
 
   const fetchPageNumber = (page) => {
@@ -108,10 +112,13 @@ const Products = () => {
                 <ProductCard key={data.id} data={data} />
               ))}
             </Box>
-            <CustomPagination
-              pageCount={pageCount}
-              sendPage={fetchPageNumber}
-            />
+            {loader && <Loader />}
+            {pageCount > 0 && (
+              <CustomPagination
+                pageCount={pageCount}
+                sendPage={fetchPageNumber}
+              />
+            )}
           </Grid>
         </Grid>
       </Container>
