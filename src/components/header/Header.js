@@ -16,6 +16,11 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useDispatch } from "react-redux";
+
+// internal imports
+import Cart from "../cart/Cart";
+import { toggleCart } from "../../store/actions/cart";
 
 const styles = {
   box: {
@@ -122,32 +127,41 @@ const SearchBar = () => {
 };
 
 // Header Component
-const Header = () => (
-  <Box sx={styles.box}>
-    <Container>
-      <Toolbar sx={styles.toolbar}>
-        <Box sx={styles.box2}>
-          <Typography component="div" sx={styles.typography1}>
-            Medicare
-          </Typography>
-          <SearchBar />
-        </Box>
-        <Box sx={{ flexGrow: 1 }} />
+const Header = () => {
+  const dispatch = useDispatch();
 
-        <Box sx={styles.box2}>
-          <Typography variant="caption" sx={styles.typography2}>
-            Login | SignUp
-          </Typography>
-          <PersonOutlinedIcon />
-          <IconButton color="inherit">
-            <Badge badgeContent={1} color="error">
-              <ShoppingCartOutlinedIcon />
-            </Badge>
-          </IconButton>
-        </Box>
-      </Toolbar>
-    </Container>
-  </Box>
-);
+  const handleOpen = () => {
+    dispatch(toggleCart());
+  };
+
+  return (
+    <Box sx={styles.box}>
+      <Container>
+        <Toolbar sx={styles.toolbar}>
+          <Box sx={styles.box2}>
+            <Typography component="div" sx={styles.typography1}>
+              Medicare
+            </Typography>
+            <SearchBar />
+          </Box>
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Box sx={styles.box2}>
+            <Typography variant="caption" sx={styles.typography2}>
+              Login | SignUp
+            </Typography>
+            <PersonOutlinedIcon />
+            <IconButton color="inherit" onClick={handleOpen}>
+              <Badge badgeContent={1} color="error">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </Container>
+      <Cart />
+    </Box>
+  );
+};
 
 export default Header;
