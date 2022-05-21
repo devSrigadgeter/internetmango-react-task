@@ -16,7 +16,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // internal imports
 import Cart from "../cart/Cart";
@@ -129,6 +129,14 @@ const SearchBar = () => {
 // Header Component
 const Header = () => {
   const dispatch = useDispatch();
+  const cartData = useSelector(({ cart }) => cart?.cart);
+
+  let total = 0;
+  if (cartData.length) {
+    cartData.forEach((item) => {
+      total += item?.count || 0;
+    });
+  }
 
   const handleOpen = () => {
     dispatch(toggleCart());
@@ -152,14 +160,14 @@ const Header = () => {
             </Typography>
             <PersonOutlinedIcon />
             <IconButton color="inherit" onClick={handleOpen}>
-              <Badge badgeContent={1} color="error">
+              <Badge badgeContent={total} color="error">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
           </Box>
         </Toolbar>
       </Container>
-      <Cart />
+      <Cart total={total} />
     </Box>
   );
 };

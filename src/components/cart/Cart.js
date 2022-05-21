@@ -46,17 +46,10 @@ const styles = {
 };
 
 // Cart Component
-const Cart = () => {
+const Cart = ({ total }) => {
   const dispatch = useDispatch();
   const isCartOpen = useSelector(({ cart }) => cart?.isOpen);
   const cartData = useSelector(({ cart }) => cart?.cart);
-
-  let total = 0;
-  if (cartData.length) {
-    cartData.forEach((item) => {
-      total += item?.count || 0;
-    });
-  }
 
   const handleClose = () => {
     dispatch(toggleCart());
