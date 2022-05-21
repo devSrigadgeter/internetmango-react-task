@@ -14,6 +14,9 @@ const theme = ({ children }) => {
           text: {
             primary: "#484848",
             white: "#fff",
+            black: "#000",
+            gray: "#c0c0c0",
+            lightGray: "#c0c0c078",
           },
         },
       })}
