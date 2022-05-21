@@ -20,11 +20,15 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 const styles = {
   box: {
     width: "100%",
-    height: "100%",
+    height: "fit-content",
     pt: 1,
     pb: 1,
     color: "text.white",
     backgroundColor: "primary.main",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    zIndex: 2,
   },
   toolbar: {
     pl: "0 !important",

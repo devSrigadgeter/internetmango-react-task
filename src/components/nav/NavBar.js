@@ -10,7 +10,15 @@ import {
 } from "@mui/material";
 
 const styles = {
-  box: {
+  box1: {
+    width: "100%",
+    position: "fixed",
+    top: "80px",
+    left: 0,
+    zIndex: 2,
+    backgroundColor: "text.white",
+  },
+  box2: {
     display: "flex",
     justifyContent: "space-between",
     pt: 2.5,
@@ -50,9 +58,9 @@ const list = [
 
 // Navbar Component
 const NavBar = () => (
-  <Box>
+  <Box sx={styles.box1}>
     <Container>
-      <Box sx={styles.box}>
+      <Box sx={styles.box2}>
         {list.map((item) => (
           <FormControl
             key={item}

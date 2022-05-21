@@ -9,6 +9,9 @@ import Links from "./FooterConstants";
 import FooterLastCol from "../../assets/FooterLastCol.png";
 
 const styles = {
+  box: {
+    zIndex: 1,
+  },
   divider: {
     mt: 8,
     mb: 8,
@@ -44,7 +47,7 @@ const FooterColumn = ({ title, list }) => (
 
 // Footer Component
 const Footer = () => (
-  <Box>
+  <Box sx={styles.box}>
     <Divider sx={styles.divider} />
     <Container>
       <Box sx={styles.footerCols}>
