@@ -12,10 +12,7 @@ import {
 const styles = {
   box1: {
     width: "100%",
-    position: "fixed",
-    top: "80px",
-    left: 0,
-    zIndex: 2,
+    mt: 10,
     backgroundColor: "text.white",
   },
   box2: {

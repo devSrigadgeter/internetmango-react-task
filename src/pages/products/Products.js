@@ -20,7 +20,6 @@ const NO_OF_PRODUCTS_PER_PAGE = 16;
 
 const styles = {
   box: {
-    mt: 20,
     zIndex: 1,
   },
   bold: {
