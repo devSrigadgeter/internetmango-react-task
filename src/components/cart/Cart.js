@@ -56,7 +56,7 @@ const Cart = ({ total }) => {
   };
 
   const handleCheckout = () => {
-    console.log("checking out items >>");
+    console.log("checking out items >>", cartData);
   };
 
   return (
@@ -83,6 +83,7 @@ const Cart = ({ total }) => {
         {cartData.length
           ? cartData.map((item) => (
               <Stack
+                key={item?.product?.id}
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
