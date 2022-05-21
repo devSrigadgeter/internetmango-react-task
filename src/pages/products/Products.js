@@ -1,5 +1,6 @@
 // external imports
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
@@ -10,6 +11,10 @@ import ProductCard from "../../components/product/ProductCard";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import CustomPagination from "../../components/pagination/CustomPagination";
 import { PRODUCTS_API_URL } from "../../utils/ApiConstants";
+import {
+  updateProducts,
+  updatePaginatedProducts,
+} from "../../store/actions/products";
 
 const NO_OF_PRODUCTS_PER_PAGE = 16;
 
@@ -31,9 +36,17 @@ const styles = {
 
 // Products section
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [paginatedData, setPaginatedData] = useState([]);
+  const storedProducts = useSelector(({ products }) => products.products);
+  const storedPaginatedProducts = useSelector(
+    ({ products }) => products.paginatedProducts
+  );
+  const [products, setProducts] = useState(storedProducts || []);
+  const [paginatedData, setPaginatedData] = useState(
+    storedPaginatedProducts || []
+  );
   const [pageCount, setPageCount] = useState(1);
+
+  const dispatch = useDispatch();
 
   const fetchProducts = () => {
     axios
@@ -45,7 +58,10 @@ const Products = () => {
           setPageCount(
             Math.ceil(responseData.length / NO_OF_PRODUCTS_PER_PAGE)
           );
-          setPaginatedData(responseData.slice(0, NO_OF_PRODUCTS_PER_PAGE));
+          const pageData = responseData.slice(0, NO_OF_PRODUCTS_PER_PAGE);
+          setPaginatedData(pageData);
+          dispatch(updateProducts(responseData));
+          dispatch(updatePaginatedProducts(pageData));
         }
       })
       .catch((err) => console.error(err));
@@ -57,6 +73,7 @@ const Products = () => {
       page * NO_OF_PRODUCTS_PER_PAGE
     );
     setPaginatedData(currentProducts);
+    dispatch(updatePaginatedProducts(currentProducts));
   };
 
   useEffect(() => {
