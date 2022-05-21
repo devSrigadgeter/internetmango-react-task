@@ -17,6 +17,11 @@ const theme = ({ children }) => {
             black: "#000",
             gray: "#c0c0c0",
             lightGray: "#c0c0c078",
+            darkGray: "#999999",
+            red: "#e44918",
+          },
+          background: {
+            green: "#5ca239",
           },
         },
       })}
