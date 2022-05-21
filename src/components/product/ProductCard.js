@@ -1,8 +1,8 @@
 // external imports
 import React from "react";
-import { Avatar, Box, Button, Rating, Stack, Typography } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Avatar, Box, Rating, Stack, Typography } from "@mui/material";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
+import ProductCardActions from "./ProductCardActions";
 
 const styles = {
   card: {
@@ -79,7 +79,7 @@ const styles = {
   box4: {
     mt: 1,
   },
-  button: {
+  colorWhite: {
     color: "text.white",
   },
   offerTag: {
@@ -174,14 +174,7 @@ const ProductCard = ({ data }) => {
           <Typography variant="body2" component="span" sx={[styles.price]}>
             &#8377;{data?.price}
           </Typography>
-          <Button
-            size="small"
-            variant="contained"
-            startIcon={<ShoppingCartIcon />}
-            sx={styles.button}
-          >
-            Add
-          </Button>
+          <ProductCardActions product={data} />
         </Box>
       </Box>
       <Box sx={styles.offerTag}>
@@ -189,7 +182,7 @@ const ProductCard = ({ data }) => {
           noWrap
           variant="caption"
           component="span"
-          sx={[styles.button, styles.smallSizeText]}
+          sx={[styles.colorWhite, styles.smallSizeText]}
         >
           50% Off
         </Typography>
